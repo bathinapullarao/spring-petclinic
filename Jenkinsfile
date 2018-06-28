@@ -20,7 +20,7 @@ node
 	
 	stage('Build')
 	{
-        sh "mvn clean install"
+        sh "mvn package"
         }
   
      stage("Prune_deleteUnusedImages")
