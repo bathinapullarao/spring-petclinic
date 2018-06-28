@@ -14,7 +14,7 @@ EXPOSE 8085
 COPY /target/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar //
 # The application properties
 #COPY /var/lib/jenkins/workspace/Test/src/main/resources/application.yml //
-
+RUN chmod +x /var/lib/jenkins/workspace/op/target/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar
 
 # Run the jar file
 #ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar"]
