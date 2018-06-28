@@ -17,5 +17,5 @@ COPY /target/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar //
 #RUN ["/bin/bash", "-c","chmod +x /var/lib/jenkins/workspace/op/target/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar"]
 
 # Run the jar file
-#ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar"]
-CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar"]
+#CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar"]
