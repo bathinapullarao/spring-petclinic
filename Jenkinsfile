@@ -214,7 +214,7 @@ def pushToImage(containerName, tag, dockerUser, dockerPassword){
 
 def runApp(containerName, tag, dockerHubUser, httpPort){
     sh "docker pull $dockerHubUser/$containerName"
-        sh "docker run -it --rm -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
+        sh "docker run -d --rm -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
     //sh "docker run -d --rm -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
 //    sh "docker run -d --rm -p $httpPort:$httpPort bathinapullarao/jenkins-pipelinee"   
 	echo "Application started on port: ${httpPort} (http)"
@@ -224,19 +224,20 @@ def runApp(containerName, tag, dockerHubUser, httpPort){
 
 def dipQA(containerName, tag, dockerHubUser, httpPort){
     sh "docker pull $dockerHubUser/$containerName"
-    sh "docker run -p $httpPort:$httpPort bathinapullarao/jenkins-pipelinee"
-    echo "Application started on port: ${httpPort} (http)"
+    //sh "docker run -p $httpPort:$httpPort bathinapullarao/jenkins-pipelinee"
+sh "docker run -d --rm -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
+        echo "Application started on port: ${httpPort} (http)"
 }
 def dipUAT(containerName, tag, dockerHubUser, httpPort){
     sh "docker pull $dockerHubUser/$containerName"
     //sh "docker run -p $httpPort:$httpPort bathinapullarao/jenkins-pipelinee"
-        sh "docker run -it --rm -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
+        sh "docker run -d --rm -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
     echo "Application started on port: ${httpPort} (http)"
 }
 def dipProd(containerName, tag, dockerHubUser, httpPort){
     sh "docker pull $dockerHubUser/$containerName"
    // sh "docker run -p $httpPort:$httpPort bathinapullarao/jenkins-pipelinee"
-    sh "docker run -it --rm -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
+    sh "docker run -d --rm -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
         echo "Application started on port: ${httpPort} (http)"
 }
 
