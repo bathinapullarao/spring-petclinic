@@ -199,7 +199,7 @@ def imagePrune(containerName){
 }
 
 def imageBuild(containerName, tag){
-         sh "chmod +x  /var/lib/jenkins/workspace/op/target/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar"       
+//         sh "chmod +x  /var/lib/jenkins/workspace/op/target/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar"       
          sh "docker build -t $containerName:$tag ."
         //    sh "docker build -t $containerName:$tag  -t $containerName --pull --no-cache ."
     echo "Image build complete"
