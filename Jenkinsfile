@@ -1,6 +1,6 @@
 //import static groovyx.net.http.ContentType.TEXT
 
-def CONTAINER_NAME="jenkins-pipelinee"
+def CONTAINER_NAME="jenkins-pipeli"
 def CONTAINER_TAG="latest"
 def DOCKER_HUB_USER="bathinapullarao"
 def HTTP_PORT="8087"
