@@ -42,7 +42,10 @@ pipeline
         
         withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) 
           {
-            pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
+            sh "docker login -u $dockerUser -p $dockerPassword"
+            sh "docker tag spring-petclinic:latest bathinapullarao/spring-petclinic:latest"
+            sh "docker push bathinapullarao/spring-petclinic:latest"
+            echo "Image push complete"
           }
         	
         
@@ -50,10 +53,10 @@ pipeline
     }
   }
 }
-def pushToImage(containerName, tag, dockerUser, dockerPassword)
+/*def pushToImage(containerName, tag, dockerUser, dockerPassword)
 {
     sh "docker login -u $dockerUser -p $dockerPassword"
     sh "docker tag $containerName:$tag $dockerUser/$containerName:$tag"
     sh "docker push $dockerUser/$containerName:$tag"
     echo "Image push complete"
-}
+} */
