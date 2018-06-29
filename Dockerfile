@@ -1,4 +1,4 @@
 FROM anapsix/alpine-java
 LABEL maintainer="Bathina Pullarao"
-COPY /target/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar /var/lib/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar
-CMD ["java","-jar","/var/lib/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar"]
+COPY /target/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar /home/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar
+CMD ["java","-jar","/home/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar"]
