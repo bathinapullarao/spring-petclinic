@@ -1,9 +1,9 @@
 #!groovy
 
-def CONTAINER_NAME="spring-petclinic"
-def CONTAINER_TAG="latest"
-def DOCKER_HUB_USER="bathinapullarao"
-def HTTP_PORT="8087"
+//def CONTAINER_NAME="spring-petclinic"
+//def CONTAINER_TAG="latest"
+//def DOCKER_HUB_USER="bathinapullarao"
+//def HTTP_PORT="8087"
 
 
 pipeline 
@@ -42,7 +42,7 @@ pipeline
         
         withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) 
           {
-            sh "docker login -u $dockerUser -p $dockerPassword"
+            sh "docker login -u $env.USERNAME -p $env.PASSWORD"
             sh "docker tag spring-petclinic:latest bathinapullarao/spring-petclinic:latest"
             sh "docker push bathinapullarao/spring-petclinic:latest"
             echo "Image push complete"
