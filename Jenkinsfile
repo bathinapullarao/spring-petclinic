@@ -1,30 +1,41 @@
 #!groovy
-
-pipeline {
+pipeline 
+{
   agent none
-  stages {
-    stage('Maven Install') {
-      agent {
-        docker {
+  stages 
+  {
+    stage('Maven Install') 
+    {
+      agent 
+      {
+        docker 
+        {
           image 'maven:3.5.0'
         }
       }
-      steps {
+      steps 
+      {
         sh 'mvn clean install'
       }
     }
-    stage('Docker Build') {
+    stage('Docker Build') 
+    {
       agent any
-      steps {
+      steps 
+      {
         sh 'docker build -t shanem/spring-petclinic:latest .'
       }
     }
-    stage('Docker Push') {
+    stage('Docker Push') 
+    {
       agent any
-      steps {
-//        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+      steps 
+      {
+//        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) 
+        {
 //          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-        {sh "docker login -u $dockerUser -p $dockerPassword"
+        
+          sh "docker login -u $dockerUser -p $dockerPassword"
           sh 'docker push shanem/spring-petclinic:latest'
         }
       }
