@@ -6,7 +6,6 @@ LABEL maintainer="Bathina Pullarao"
 
 # Add a volume pointing to /tmp
 VOLUME /tmp
-
 # Make port 8085 available to the world outside this container
 EXPOSE 8085
 
