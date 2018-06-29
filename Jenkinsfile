@@ -1,4 +1,11 @@
 #!groovy
+
+def CONTAINER_NAME="spring-petclinic"
+def CONTAINER_TAG="latest"
+def DOCKER_HUB_USER="bathinapullarao"
+def HTTP_PORT="8087"
+
+
 pipeline 
 {
   agent none
@@ -23,7 +30,8 @@ pipeline
       agent any
       steps 
       {
-        sh 'docker build -t shanem/spring-petclinic:latest .'
+        sh 'docker build -t bathinapullarao/spring-petclinic:latest .'
+        // 'docker build -t shanem/spring-petclinic:latest .'
       }
     }
     stage('Docker Push') 
@@ -31,14 +39,22 @@ pipeline
       agent any
       steps 
       {
+        stage('pushtoDockerRegistry')
+        {
         withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) 
-        
-//          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-        
-          sh "docker login -u $dockerHubUser -p $dockerHubPassword"
-          sh 'docker push shanem/spring-petclinic:latest'
+          {
+            pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
+          }
+        }	
         
       }
     }
   }
+}
+def pushToImage(containerName, tag, dockerUser, dockerPassword)
+{
+    sh "docker login -u $dockerUser -p $dockerPassword"
+    sh "docker tag $containerName:$tag $dockerUser/$containerName:$tag"
+    sh "docker push $dockerUser/$containerName:$tag"
+    echo "Image push complete"
 }
