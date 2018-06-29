@@ -31,7 +31,7 @@ pipeline
       agent any
       steps 
       {
-//        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) 
+        withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) 
         
 //          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
         
