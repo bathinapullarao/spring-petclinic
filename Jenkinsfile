@@ -39,13 +39,12 @@ pipeline
       agent any
       steps 
       {
-        stage('pushtoDockerRegistry')
-        {
+        
         withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) 
           {
             pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
           }
-        }	
+        	
         
       }
     }
