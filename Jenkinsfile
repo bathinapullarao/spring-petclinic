@@ -1,4 +1,5 @@
 #!groovy
+def DOCKER_HUB_USER="bathinapullarao"
 
 pipeline 
 {
