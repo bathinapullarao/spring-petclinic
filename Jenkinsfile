@@ -3,43 +3,33 @@
 pipeline 
 {
   agent any
-  stages 
-  {
-    stage('Maven Install') 
+    stages 
     {
-      agent 
-      {
-        docker 
-        {
-          image 'maven:3.5.0'
-        }
-      }
-      steps 
-      {
-        sh 'mvn clean install'
-      }
-    }
-    stage('Docker Build') 
-    {
-      agent any
-      steps 
-      {
-        sh 'docker build -t bathinapullarao/spring-petclinic:latest .'
+       stage('Maven Install') 
+       {
+          steps 
+          {
+          sh 'mvn clean install'
+          }
        }
-    }
-    stage('Docker Push') 
-    {
-      agent any
-      steps 
+      stage('Docker Build') 
+       {
+         steps 
+         {
+          sh 'docker build -t bathinapullarao/spring-petclinic:latest .'
+         }
+       }
+      stage('Docker Push') 
       {
-        
-        withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) 
+        steps 
+        {
+         withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) 
           {
             sh "docker login -u $env.USERNAME -p $env.PASSWORD"
             sh "docker push bathinapullarao/spring-petclinic:latest"
             echo "Image push complete"
           }
+        }
       }
-    }
-  }
+   }
 }
