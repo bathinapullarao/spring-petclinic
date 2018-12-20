@@ -32,5 +32,13 @@ pipeline
           }
         }
       }
+      stage('Docker run') 
+       {
+         steps 
+         {
+          sh 'docker run -p 8081:8080 shanem/spring-petclinic'
+         }
+       }
+      
    }
 }
