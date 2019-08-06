@@ -1,0 +1,45 @@
+#!groovy
+
+pipeline 
+{
+  agent any
+    stages 
+    {
+       stage('git checkout ') 
+       {
+          steps 
+          {
+                checkout scm
+          }
+       }
+       stage('Delete old Deployment')
+       {
+           steps
+           {
+             sshagent(['rsa-key-20190521']) 
+             {
+                    sh 'ssh -o StrictHostkeyChecking=no rsa-key-20190521@35.184.21.237  rm -rvf /var/www/html/*'  
+             }
+           }
+       }
+       stage('Deploy to apache')
+       {
+           steps
+           {
+             sshagent(['rsa-key-20190521']) 
+             {
+                    sh 'scp -o StrictHostkeyChecking=no /var/lib/jenkins/workspace/cicid/* rsa-key-20190521@35.184.21.237:/var/www/html' 
+                    sh 'ssh -o StrictHostkeyChecking=no rsa-key-20190521@35.184.21.237 rm -f /var/www/html/Jenkinsfile'
+             }
+           }
+       }
+/*       stage('Deploy to apache') 
+       {
+          steps 
+          {
+                   sh 'scp /var/lib/jenkins/workspace/cicid/* rsa-key-20190521@35.184.21.237:/var/www/html'
+          }
+       }  */
+      
+   }
+}
